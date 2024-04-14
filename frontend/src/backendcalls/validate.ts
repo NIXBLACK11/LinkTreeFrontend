@@ -19,7 +19,7 @@ export async function validateUser(userName: string, token: string): Promise<boo
             const axiosError: AxiosError = error;
             console.log(axiosError);
             if (axiosError.response && axiosError.response.status === 401) {
-                console.log("Unauthorized - Username or password incorrect");
+                console.log("Unauthorized");
             } else {
                 console.log("An error occurred during signin");
             }
