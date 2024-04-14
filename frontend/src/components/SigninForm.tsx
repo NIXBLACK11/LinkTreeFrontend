@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 
 import { User } from "../interfaces/userInterface";
-import { validateSigninData } from "../utils/validateSignin";
+import { validateUserData } from "../utils/validateUser";
 import { Alert, AlertProps } from './Alert';
 import { signinUser } from "../backendcalls/signin";
 
@@ -21,7 +21,7 @@ export const SigninForm = () => {
     };
 
     const signin = async () => {
-        const valid = validateSigninData(details);
+        const valid = validateUserData(details);
         if (!valid) {
             setAlert({
                 type: 'error',
@@ -46,6 +46,7 @@ export const SigninForm = () => {
             heading: 'Successfully signed!',
             data: '',
         });
+        console.log(`/${details.userName}`);
         navigate(`/${details.userName}`);
         return;
     }
@@ -82,7 +83,7 @@ export const SigninForm = () => {
                             <div className="mt-6">
                                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Username</label>
                                 <input 
-                                    type="string" 
+                                    type="text" 
                                     name="userName" 
                                     id="userName" 
                                     placeholder="john1123" 

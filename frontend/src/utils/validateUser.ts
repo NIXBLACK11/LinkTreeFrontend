@@ -1,6 +1,6 @@
 import { User } from "../interfaces/userInterface";
 
-export function validateSigninData(userData: User) :boolean{
+export function validateUserData(userData: User) :boolean{
     if(!userData.userName || !userData.userPassword) {
         return false;
     }
