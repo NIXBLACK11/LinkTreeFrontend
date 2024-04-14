@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 
 import { User } from "../interfaces/userInterface";
 import { validateSigninData } from "../utils/validateSignin";
-import { Alert, AlertProps } from "./Alert";
+import { Alert, AlertProps } from './Alert';
 import { signinUser } from "../backendcalls/signin";
 
 export const SigninForm = () => {
     const [details, setDetails] = useState<User>({userName: "null", userPassword: "null"});
+    const [alert, setAlert] = useState<AlertProps | null>(null);
     const navigate = useNavigate();
-    const [alert, setAlert] = useState<AlertProps | null>(null); // State to manage alert
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(details);
@@ -25,35 +25,33 @@ export const SigninForm = () => {
         if (!valid) {
             setAlert({
                 type: 'error',
-                heading: 'Signin Error',
-                data: 'Invalid signin data provided. Please check your inputs.',
+                heading: 'Validation Error',
+                data: 'Please provide valid details for signin.',
             });
             return;
         }
-        
-        const successSignIn = signinUser(details);
-        console.log(successSignIn);
+
+        const successSignIn = await signinUser(details);
         if (!successSignIn) {
             setAlert({
-                type: "warning" ,
-                heading: "Invalid credentials", 
-                data: "Check username or password"
+                type: 'error',
+                heading: 'Signin Error',
+                data: 'Please provide valid details for signin.',
             });
             return;
         }
         
-
-        if(await successSignIn && valid) {
-            setAlert({
-                type: "success" ,
-                heading: "Successfully signed in" ,
-                data: "success" 
-            });
-            {navigate(`/${details.userName}`)}
-        }
+        setAlert({
+            type: 'success',
+            heading: 'Successfully signed!',
+            data: '',
+        });
+        navigate(`/${details.userName}`);
+        return;
     }
 
     return <>
+        {alert && <Alert {...alert} />}
         <div className="bg-white dark:bg-gray-900 ">
             <div className="flex justify-center h-screen">
                 <div className="hidden bg-cover lg:block lg:w-2/3" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")' }}>

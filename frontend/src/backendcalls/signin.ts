@@ -10,8 +10,8 @@ export async function signinUser(userData: User): Promise<boolean> {
             Username: userData.userName,
             Password: userData.userPassword
         }
+        
         const response: AxiosResponse<Token> = await axios.post('http://localhost:8080/login', data);
-        console.log(userData);
         const token: Token = response.data;
         setCookie("jwtToken", token.token);
         console.log(token.token);
