@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 import { User } from "../interfaces/userInterface";
 import { Alert, AlertProps } from "./Alert";
@@ -20,6 +20,7 @@ export const SignupForm = () => {
     };
 
     const signup = async () => {
+        console.log(details);
         const valid = validateUserData(details);
         if (!valid) {
             setAlert({
@@ -34,18 +35,18 @@ export const SignupForm = () => {
         if (!successSignIn) {
             setAlert({
                 type: 'error',
-                heading: 'Signin Error',
-                data: 'Please provide valid details for signin.',
+                heading: 'Signup Error',
+                data: 'Username might be taken.',
             });
             return;
         }
         
         setAlert({
             type: 'success',
-            heading: 'Successfully signed!',
+            heading: 'Successfully signed up!',
             data: '',
         });
-        navigate(`/${details.userName}`);
+        navigate(`/signin`);
         return;
     }
 
@@ -66,7 +67,7 @@ export const SignupForm = () => {
                             Let’s get you all set up so you can verify your personal account and begin setting up your profile.
                         </p>
 
-                        <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
+                        <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
                             <div>
                                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Username</label>
                                 <input 
@@ -105,18 +106,26 @@ export const SignupForm = () => {
 
                             <div></div>
 
-                            <button
+                            {/* <button
                                 onClick={signup}
                                 className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                 <span>Sign Up </span>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
+                                    <path fillRule="evenodd"
                                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                        clip-rule="evenodd" />
+                                        clipRule="evenodd" />
                                 </svg>
-                            </button>
-                        </form>
+                            </button> */}
+                            <div className="mt-6">
+                                <button 
+                                    onClick={signup}
+                                    className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                                >
+                                    Sign up
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
