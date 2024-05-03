@@ -7,13 +7,9 @@ export interface UserDetailsResult {
     error?: string;
 }
 
-export async function userDetails(userName: string, token: string): Promise<UserDetailsResult> {
+export async function userDetails(userName: string): Promise<UserDetailsResult> {
     try {
-        const response: AxiosResponse<Link[]> = await axios.get(`http://localhost:8080/${userName}`, {
-            headers: {
-                Authorization: token
-            }
-        });
+        const response: AxiosResponse<Link[]> = await axios.get(`http://localhost:8080/${userName}`);
 
         if (response.status === 200) {
             const links: Link[] = response.data;

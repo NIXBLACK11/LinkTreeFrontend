@@ -28,18 +28,19 @@ export const User = () => {
             }
             if (!token) {
                 setOwns(false);
-                return;
+            } else {
+                // validate user
+                const valid = await validateUser(userName, token);
+                if (!valid) {
+                    setOwns(false);
+                } else {
+                    setOwns(true);
+                }
             }
 
-            // validate user
-            const valid = await validateUser(userName, token);
-            if (!valid) {
-                setOwns(false);
-                return;
-            }
 
             // fetch user data .i.e links
-            const userData: UserDetailsResult = await userDetails(userName, token);
+            const userData: UserDetailsResult = await userDetails(userName);
             if (userData.success === false) {
                 setAlert({
                     type: 'error',
@@ -49,7 +50,6 @@ export const User = () => {
                 return;
             }
             if(userData.data) {
-                setOwns(true);
                 setLinks(userData.data);
             }
             setLoading(false);
