@@ -1,0 +1,30 @@
+<div className="pt-8 container px-4 mx-auto h-screen dark:bg-gray-900">
+                        <div className="overflow-visible ">
+                            {/* <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead className="bg-gray-50 dark:bg-gray-800">
+                                    <tr>
+                                        <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Website</th>
+                                        <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Url</th>
+                                        <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Description</th>
+                                        <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Tags</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900"> */}
+                                    {links.map((link, index) => (
+                                        <tr key={index}>
+                                            {Object.entries(link).map(([key, value], idx) => (
+                                                <React.Fragment key={`${key}-${idx}`}>
+                                                    <td className="px-4 py-2">
+                                                        {key}
+                                                    </td>
+                                                    <td className="px-4 py-2">
+                                                        {value}
+                                                    </td>
+                                                </React.Fragment>
+                                            ))}
+                                        </tr>
+                                    ))}
+                                {/* </tbody>
+                            </table> */}
+                        </div>
+                    </div>

@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ClockLoader from "react-spinners/ClockLoader";
+
 import { getCookie } from "../utils/saveCookie";
 import { validateUser } from "../backendcalls/validate";
 import { Link } from "../interfaces/linksInterface";
 import { userDetails, UserDetailsResult } from "../backendcalls/userDetails";
 import { Alert, AlertProps } from '../components/Alert';
+import { Owner } from "../components/Owner";
+import { Visitor } from "../components/Visitor";
 
 export const User = () => {
     const { userName } = useParams<{ userName: string }>();
-    const [alert, setAlert] = useState<AlertProps | null>(null);
     const token = getCookie("jwtToken");
-    const [links, setLinks] = useState<Link[]>([]); // Initialize with an empty array
-    console.log(userName);
     const navigate = useNavigate();
+
+    const [alert, setAlert] = useState<AlertProps | null>(null);
+    const [links, setLinks] = useState<Link[]>([]); // Initialize with an empty array
+    const [loading, setLoading] = useState<Boolean>(true);
+    const [own, setOwns] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             if (!userName) {
-                navigate("/signup");
+                navigate("/signin");
                 return;
             }
             if (!token) {
-                navigate("/signup");
+                setOwns(false);
                 return;
             }
 
             // validate user
             const valid = await validateUser(userName, token);
             if (!valid) {
-                navigate("/signup");
+                setOwns(false);
                 return;
             }
 
@@ -42,9 +48,11 @@ export const User = () => {
                 });
                 return;
             }
-            console.log(userData.data);
-            if(userData.data) setLinks(userData.data);
-            console.log(links)
+            if(userData.data) {
+                setOwns(true);
+                setLinks(userData.data);
+            }
+            setLoading(false);
         };
 
         fetchData();
@@ -53,27 +61,24 @@ export const User = () => {
     return (
         <>
             {alert && <Alert {...alert} />}
-            <div className="pt-8 container px-4 mx-auto h-screen dark:bg-gray-900">
-                <div className="overflow-visible border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead className="bg-gray-50 dark:bg-gray-800">
-                            <tr>
-                                <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Website</th>
-                                <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Url</th>
-                                <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Description</th>
-                                <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Tags</th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                            {links.map((link, index) => (
-                                <tr key={index}>
-                                    <td className="px-4 py-2">eeee{link.name}</td>
-                                    <td className="px-4 py-2">{link.url}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+            <div className=" pt-8 h-screen container px-4 dark:bg-gray-900 flex flex-col items-center ">
+                {loading ? (
+                    <>
+                        <ClockLoader color="#1F2937" />
+                    </> ) : (
+                    <>
+                        {own ? (
+                        <>
+                            <Owner links={links}/>
+                        </> ) : (
+                        <>
+                            <Visitor links={links}/>
+                        </>
+                        )
+                        }
+                    </>
+                )
+                }
             </div>
         </>
     );
