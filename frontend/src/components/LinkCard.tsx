@@ -1,6 +1,6 @@
 export const LinkCard = (props: {heading: string, url: string}) => {
     return (
-        <div className="w-100 flex flex-col items-center justify-center pt-6 pb-6">
+        <div className="w-100 flex flex-col items-center justify-center pb-1">
             <div className="bg-white rounded-lg shadow-lg dark:bg-gray-800">
                 <h3 className="py-2 px-2 font-bold text-center text-gray-800 uppercase dark:text-white">{props.heading}</h3>
 
