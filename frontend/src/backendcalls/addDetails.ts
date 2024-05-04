@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 
 export async function addDetails(userName: string, heading: string, url: string, token: string): Promise<boolean> {
+    console.log("In this");
     try {
         const response = await axios.post(`http://localhost:8080/${userName}/addDetails`, {
             name: heading,
