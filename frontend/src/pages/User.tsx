@@ -29,7 +29,6 @@ export const User = () => {
             if (!token) {
                 setOwns(false);
             } else {
-                // validate user
                 const valid = await validateUser(userName, token);
                 if (!valid) {
                     setOwns(false);
@@ -39,12 +38,11 @@ export const User = () => {
             }
 
 
-            // fetch user data .i.e links
             const userData: UserDetailsResult = await userDetails(userName);
             if (userData.success === false) {
                 setAlert({
                     type: 'error',
-                    heading: `${userData.error}`,
+                    heading: `user may not exist`,
                     data: 'Try reloading page',
                 });
                 return;
@@ -61,12 +59,17 @@ export const User = () => {
     return (
         <>
             {alert && <Alert {...alert} />}
-            <div className="pt-8 h-screen max-w-full min-w-full min-h-full max-h-full container px-4 dark:bg-gray-900 flex flex-col items-center bg-repeat">
+            <div 
+                className="flex flex-col items-center bg-repeat min-h-screen"
+                style={{ backgroundImage: 'url("background.jpg")' }}
+            >
                 {loading ? (
                     <>
                         <ClockLoader color="#1F2937" />
                     </> ) : (
                     <>
+                        <h1 className="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-4xl uppercase">{userName}</h1>
+                        hello
                         {own ? (
                         <>
                             <Owner links={links}/>
