@@ -11,7 +11,7 @@ export const Owner = (props: { links: Link[] }) => {
                 <tr key={index}>
                     {Object.entries(link).map(([key, value], idx) => (
                         <React.Fragment key={`${key}-${idx}`}>
-                            <div className="py-2 pt-6 pb-6">
+                            <div className="py-2 pt-6 pb-6 flex flex-col items-center justify-center">
                                 <LinkCard heading={key} url={value}/>
                                 <div>
                                     <EditDeleteButtons website={key}/>

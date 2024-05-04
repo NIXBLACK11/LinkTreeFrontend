@@ -16,7 +16,7 @@ export const User = () => {
     const navigate = useNavigate();
 
     const [alert, setAlert] = useState<AlertProps | null>(null);
-    const [links, setLinks] = useState<Link[]>([]); // Initialize with an empty array
+    const [links, setLinks] = useState<Link[]>([]);
     const [loading, setLoading] = useState<Boolean>(true);
     const [own, setOwns] = useState(false);
 
@@ -61,7 +61,7 @@ export const User = () => {
     return (
         <>
             {alert && <Alert {...alert} />}
-            <div className=" pt-8 h-screen container px-4 dark:bg-gray-900 flex flex-col items-center ">
+            <div className="pt-8 h-screen max-w-full min-w-full min-h-full max-h-full container px-4 dark:bg-gray-900 flex flex-col items-center bg-repeat">
                 {loading ? (
                     <>
                         <ClockLoader color="#1F2937" />
