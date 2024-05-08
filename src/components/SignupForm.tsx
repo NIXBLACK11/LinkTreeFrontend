@@ -46,7 +46,7 @@ export const SignupForm = () => {
             heading: 'Successfully signed up!',
             data: '',
         });
-        navigate(`/signin`);
+        navigate(`/`);
         return;
     }
 

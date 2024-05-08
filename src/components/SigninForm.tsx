@@ -47,7 +47,7 @@ export const SigninForm = () => {
             data: '',
         });
         console.log(`/${details.userName}`);
-        navigate(`/${details.userName}`);
+        navigate(`user/${details.userName}`);
         return;
     }
 

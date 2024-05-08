@@ -23,7 +23,7 @@ export const User = () => {
     useEffect(() => {
         const fetchData = async () => {
             if (!userName) {
-                navigate("/signin");
+                navigate("/");
                 return;
             }
             if (!token) {
