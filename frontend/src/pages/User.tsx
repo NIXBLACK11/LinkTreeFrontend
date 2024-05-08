@@ -69,7 +69,6 @@ export const User = () => {
                     </> ) : (
                     <>
                         <h1 className="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-4xl uppercase">{userName}</h1>
-                        hello
                         {own ? (
                         <>
                             <Owner links={links}/>
