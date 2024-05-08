@@ -1,21 +1,21 @@
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse } from "axios";
 
-import { setCookie } from "../utils/saveCookie";
+import { BACKEND_URL } from './backend_url';
 import { User } from "../interfaces/userInterface";
-import { Token } from '../interfaces/tokenInterface';
+import { Token } from "../interfaces/tokenInterface";
 
-export async function signinUser(userData: User): Promise<boolean> {
+export async function signupUser(userData: User): Promise<boolean> {
     try {
         const data = {
             Username: userData.userName,
             Password: userData.userPassword
         }
         
-        const response: AxiosResponse<Token> = await axios.post('http://localhost:8080/login', data);
-        const token: Token = response.data;
-        console.log(token);
-        setCookie("jwtToken", token.token);
-        console.log(token.token);
+        const response: AxiosResponse<Token> = await axios.post(`${BACKEND_URL}signup`, data);
+        console.log(response);
+        if(response.status!=200) {
+            return false;
+        }
         return true; // Signin successful
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -25,7 +25,7 @@ export async function signinUser(userData: User): Promise<boolean> {
             if (axiosError.response && axiosError.response.status === 401) {
                 console.log("Unauthorized - Username or password incorrect");
             } else {
-                console.log("An error occurred during signin");
+                console.log("An error occurred during signup");
             }
         }
         return false; // Signin failed

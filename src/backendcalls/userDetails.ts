@@ -1,4 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+
+import { BACKEND_URL } from './backend_url';
 import { Link } from "../interfaces/linksInterface";
 
 export interface UserDetailsResult {
@@ -9,7 +11,7 @@ export interface UserDetailsResult {
 
 export async function userDetails(userName: string): Promise<UserDetailsResult> {
     try {
-        const response: AxiosResponse<Link[]> = await axios.get(`http://localhost:8080/${userName}`);
+        const response: AxiosResponse<Link[]> = await axios.get(`${BACKEND_URL}${userName}`);
 
         if (response.status === 200) {
             const links: Link[] = response.data;

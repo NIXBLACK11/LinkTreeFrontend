@@ -1,8 +1,9 @@
 import axios, { AxiosError } from 'axios';
+import { BACKEND_URL } from './backend_url';
 
 export async function validateUser(userName: string, token: string): Promise<boolean> {
     try {
-        const response = await axios.get(`http://localhost:8080/${userName}/validate`, {
+        const response = await axios.get(`${BACKEND_URL}${userName}/validate`, {
             headers: {
                 Authorization: token
             }

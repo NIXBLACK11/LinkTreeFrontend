@@ -1,9 +1,12 @@
 import axios, { AxiosError } from 'axios';
+import { BACKEND_URL } from './backend_url';
 
-export async function deleteLink(userName: string, token: string, website: string): Promise<boolean> {
+export async function addDetails(userName: string, heading: string, url: string, token: string): Promise<boolean> {
+    console.log("In this");
     try {
-        const response = await axios.post(`http://localhost:8080/${userName}/removeDetails`, {
-            name: website
+        const response = await axios.post(`${BACKEND_URL}${userName}/addDetails`, {
+            name: heading,
+            url: url
         }, {
             headers: {
                 Authorization: token
@@ -29,3 +32,4 @@ export async function deleteLink(userName: string, token: string, website: strin
         return false;
     }
 }
+
