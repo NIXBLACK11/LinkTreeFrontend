@@ -60,8 +60,8 @@ export const User = () => {
         <>
             {alert && <Alert {...alert} />}
             <div 
-                className="flex flex-col items-center bg-repeat min-h-screen"
-                style={{ backgroundImage: 'url("background.jpg")' }}
+                className="flex flex-col items-center bg-repeat bg-black"
+                // style={{ backgroundImage: 'url("background.jpg")' }} 
             >
                 {loading ? (
                     <>

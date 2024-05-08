@@ -7,7 +7,8 @@ export const LinkCard = (props: {heading: string, url: string}) => {
                 <h3 className="py-2 px-2 font-bold text-center text-gray-800 uppercase dark:text-white">{props.heading}</h3>
 
                 <div className="flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-700">
-                    <span className="font-bold text-gray-800 dark:text-gray-200">{props.url}</span>
+                    {/* <span className="font-bold text-gray-800 dark:text-gray-200">{props.url}</span> */}
+                    <iframe src={props.url} ></iframe>
                 </div>
 
                 <div className="flex justify-center">
