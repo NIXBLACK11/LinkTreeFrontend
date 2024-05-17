@@ -17,7 +17,7 @@ export const AddButton = () => {
         if(userName && token) {
             await addDetails(userName, formData.website, formData.url, token);
         }
-        // window.location.reload();
+        window.location.reload();
     };
 
     return (
