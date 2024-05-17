@@ -12,10 +12,10 @@ export const AddButton = () => {
     const [_data, setData] = useState<{ website: string, url: string }>();
     const token = getCookie("jwtToken");
 
-    const handleAddDetails = (formData: { website: string, url: string }) => {
+    const handleAddDetails = async (formData: { website: string, url: string }) => {
         setData(formData); // Update data state when form is submitted
         if(userName && token) {
-            addDetails(userName, formData.website, formData.url, token);
+            await addDetails(userName, formData.website, formData.url, token);
         }
         window.location.reload();
     };

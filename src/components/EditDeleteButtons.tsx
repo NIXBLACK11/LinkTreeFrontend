@@ -12,9 +12,9 @@ export const EditDeleteButtons = ({ website }: { website: string }) => {
     const token = getCookie("jwtToken");
     const { userName } = useParams<{ userName: string }>();
     
-    function callDelete() {
+    async function callDelete() {
         if(userName && token && website) {
-            const success = deleteLink(userName, token, website);
+            const success = await deleteLink(userName, token, website);
             if(!success) {
                 setAlert({
                     type: 'error',

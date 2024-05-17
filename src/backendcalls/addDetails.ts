@@ -2,7 +2,6 @@ import axios, { AxiosError } from 'axios';
 import { BACKEND_URL } from './backend_url';
 
 export async function addDetails(userName: string, heading: string, url: string, token: string): Promise<boolean> {
-    console.log("In this");
     try {
         const response = await axios.post(`${BACKEND_URL}${userName}/addDetails`, {
             name: heading,
