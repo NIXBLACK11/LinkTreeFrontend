@@ -9,6 +9,7 @@ import { userDetails, UserDetailsResult } from "../backendcalls/userDetails";
 import { Alert, AlertProps } from '../components/Alert';
 import { Owner } from "../components/Owner";
 import { Visitor } from "../components/Visitor";
+import { Navbar } from "../components/Navbar";
 
 export const User = () => {
     const { userName } = useParams<{ userName: string }>();
@@ -68,6 +69,7 @@ export const User = () => {
                         <ClockLoader color="#1F2937" />
                     </> ) : (
                     <>
+                        {/* <Navbar/> */}
                         <h1 className="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-4xl uppercase">{userName}</h1>
                         {own ? (
                         <>
