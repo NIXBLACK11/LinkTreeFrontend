@@ -55,7 +55,7 @@ export const SigninForm = () => {
         {alert && <Alert {...alert} />}
         <div className="bg-white dark:bg-gray-900 ">
             <div className="flex justify-center h-screen">
-                <div className="hidden bg-contain lg:block lg:w-2/3 bg-no-repeat m-5" style={{ backgroundImage: 'url(linktree.jpeg)' }}>
+                <div className="hidden bg-contain lg:block lg:w-2/3 bg-no-repeat m-5" style={{ backgroundImage: 'url(linktree.png)' }}>
                     <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                         <div>
                             <h2 className="text-2xl font-bold text-white sm:text-3xl">Go Link Tree</h2>
